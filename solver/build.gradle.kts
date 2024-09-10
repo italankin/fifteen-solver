@@ -17,6 +17,15 @@ kotlin {
 
 publishing {
     publications {
+        repositories {
+            maven {
+                url = uri(System.getenv("MVN_REPOSITORY") ?: "")
+                credentials {
+                    username = System.getenv("MVN_USERNAME")
+                    password = System.getenv("MVN_PASSWORD")
+                }
+            }
+        }
         create<MavenPublication>("maven") {
             groupId = property("publishing.groupId") as String
             artifactId = project.name
