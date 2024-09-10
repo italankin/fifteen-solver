@@ -1,4 +1,4 @@
-# `fifteen-solver`
+# `fifteen-solver` ![](https://jitpack.io/v/me.italankin/fifteen-solver.svg)
 
 `fifteen-solver` is a Java/Kotlin library for solving [15 puzzle][15-puzzle-wiki] games.
 
@@ -8,7 +8,7 @@
 
 ### Download
 
-1. Include JitPack repository (e.g. in `settings.gradle`):
+1. Add JitPack repository (e.g. in `settings.gradle`):
    ```groovy
    dependencyResolutionManagement {
        repositories {
