@@ -8,7 +8,27 @@
 
 ### Download
 
-TBD
+1. Include JitPack repository (e.g. in `settings.gradle`):
+   ```groovy
+   dependencyResolutionManagement {
+       repositories {
+           maven {
+               url 'https://jitpack.io'
+               content { includeGroup("me.italankin.fifteen-solver") }
+           }
+       }
+   }
+   ```
+2. Add the dependency:
+   ```groovy
+   dependencies {
+       // solver dependency
+       implementation 'me.italankin.fifteen-solver:solver:<version>'
+       // optional: game dependency, if you only need game implementation
+       implementation 'me.italankin.fifteen-solver:game:<version>'
+   }
+   ```
+   See [releases](/releases/) for available versions.
 
 ### Basic example
 
