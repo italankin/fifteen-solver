@@ -149,7 +149,7 @@ Currently available heuristics are:
 * `Inversions`
 * `EuclideanDistance`
 
-Custom heuristics can be created by implementing [`Heuristics`][heuristics-interface].
+Custom heuristics can be created by implementing [`Heuristics`][heuristics-interface] interface.
 
 [heuristics-interface]: solver/src/main/java/me/italankin/fifteen/solver/heuristics/Heuristics.kt
 
@@ -175,7 +175,7 @@ val session = Session(
 
 > [`me.italankin.fifteen.solver.generator`](solver/src/main/java/me/italankin/fifteen/solver/generator)
 
-To solve a game, a game must be created, which can be done with a help of [generators][game-generator]:
+To solve a game, it must be created, which can be done with a help of [generators][game-generator]:
 
 [game-generator]: solver/src/main/java/me/italankin/fifteen/solver/generator/GameGenerator.kt
 
