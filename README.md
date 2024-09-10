@@ -125,7 +125,7 @@ For example:
 
 ```kotlin
 val session = Session(
-    generator = randomGames().generator(),
+    generator = randomGames().generator().bounded(50),
     solvers = listOf(Solver(ManhattanDistance(), AStar())),
     reporter = SystemOutReporter().withProgress(),
     concurrency = Session.Concurrency.Fixed(numThreads = 4)
