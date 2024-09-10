@@ -28,7 +28,7 @@
        implementation 'me.italankin.fifteen-solver:game:<version>'
    }
    ```
-   See [releases](/releases/) for available versions.
+   See [releases](https://github.com/italankin/fifteen-solver/releases) for available versions.
 
 ### Basic example
 
