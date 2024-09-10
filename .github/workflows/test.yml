@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.5.2
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Test
+        run: ./gradlew test
+
+      - name: Report
+        uses: mikepenz/action-junit-report@v3
+        if: success() || failure()
+        with:
+          check_name: 'report'
+          report_paths: '**/build/test-results/*/TEST-*.xml'
