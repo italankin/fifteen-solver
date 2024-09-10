@@ -155,7 +155,9 @@ Custom heuristics can be created by implementing [`Heuristics`][heuristics-inter
 
 ### Solvers
 
-`Solver`s allow testing and comparing different combinations `Heuristics` and `Algorithm`s. For example:
+[`Solver`][solver]s allow testing and comparing different combinations `Heuristics` and `Algorithm`s. For example:
+
+[solver]: solver/src/main/java/me/italankin/fifteen/solver/Solver.kt
 
 ```kotlin
 val session = Session(
@@ -232,7 +234,7 @@ To solve a game, a game must be created, which can be done with a help of [gener
   ```kotlin
   val frozenGameGenerator = randomGames()
       .bounded(100)
-      .frozen()
+      .freeze()
   ```
 
 #### Scramblers
