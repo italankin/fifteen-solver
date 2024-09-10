@@ -15,17 +15,17 @@ kotlin {
 }
 
 publishing {
-    publications {
-        repositories {
-            maven {
-                url = uri(System.getenv("MVN_REPOSITORY") ?: "")
-                credentials {
-                    username = System.getenv("MVN_USERNAME")
-                    password = System.getenv("MVN_PASSWORD")
-                }
+    repositories {
+        maven {
+            url = uri(System.getenv("MVN_REPOSITORY") ?: "")
+            credentials {
+                username = System.getenv("MVN_USERNAME")
+                password = System.getenv("MVN_PASSWORD")
             }
         }
-        create<MavenPublication>("maven") {
+    }
+    publications {
+        register<MavenPublication>("gpr") {
             groupId = property("publishing.groupId") as String
             artifactId = project.name
             version = property("publishing.version") as String
