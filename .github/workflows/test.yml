@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
 
       - name: Test
-        run: ./gradlew test
+        run: ./gradlew --no-daemon --no-configuration-cache test
 
       - name: Report
         uses: mikepenz/action-junit-report@v3
