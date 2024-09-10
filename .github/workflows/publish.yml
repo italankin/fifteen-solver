@@ -23,7 +23,7 @@ jobs:
 
       - name: Publish
         env:
-          MVN_REPOSITORY: https://maven.pkg.github.com/$GITHUB_REPOSITORY
-          MVN_USERNAME: $GITHUB_REPOSITORY_OWNER
+          MVN_REPOSITORY: https://maven.pkg.github.com/${{ env.GITHUB_REPOSITORY }}
+          MVN_USERNAME: ${{ env.GITHUB_REPOSITORY_OWNER }}
           MVN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew --no-daemon --no-configuration-cache publish
