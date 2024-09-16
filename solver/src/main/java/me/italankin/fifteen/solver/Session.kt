@@ -114,7 +114,7 @@ class Session(
         abstract val threadPriority: Int
 
         override fun toString(): String {
-            return "${javaClass.name}(numThreads=${numThreads}, threadPriority=${threadPriority})"
+            return "${javaClass.simpleName}(numThreads=${numThreads}, threadPriority=${threadPriority})"
         }
 
         /**
