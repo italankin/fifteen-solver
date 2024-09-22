@@ -101,6 +101,11 @@ class Session(
         }
     }
 
+    /**
+     * [execute] this session in the calling thread
+     */
+    fun executeBlocking(): List<Result<Solver.Solution>> = runBlocking { execute() }
+
     abstract class Concurrency {
 
         /**
