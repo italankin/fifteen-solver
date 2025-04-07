@@ -38,24 +38,25 @@ class ProgressReporter(
     override fun onSessionStarted(session: Session) {
         val totalCount = session.stats.totalCount
         val startTime = System.currentTimeMillis()
+        val etaEstimator = EtaEstimator(totalCount)
 
         progressScope.launch {
             do {
                 val sb = StringBuilder()
                 sb.append("\rqueue: ${queueState.inQueue}/${queueState.inProgress}/${queueState.done}/$totalCount")
-                val elapsed = System.currentTimeMillis() - startTime
+                val now = System.currentTimeMillis()
+                val elapsed = now - startTime
                 val done = queueState.done.toFloat()
                 val progress = done / totalCount
                 sb.append(" (${(progress * 100).toInt()}%)")
                 sb.append(", %.3f games/s".format(done / elapsed * 1000f))
                 sb.append(", memory: ${session.stats.memoryCurrent shr 20} MB")
                 sb.append(", elapsed: ")
-                val elapsedDur = elapsed.milliseconds
-                sb.append(elapsedDur.toString(DurationUnit.SECONDS))
+                sb.append(elapsed.milliseconds.toString(DurationUnit.SECONDS))
                 sb.append(", remaining: ")
-                if (progress > 0f) {
-                    val remaining = ((1.0 / progress) * elapsed).milliseconds - elapsedDur
-                    sb.append(remaining.toString(DurationUnit.SECONDS))
+                val eta = etaEstimator.eta(now, queueState.done)
+                if (eta != null) {
+                    sb.append(eta.toString(DurationUnit.SECONDS))
                 } else {
                     sb.append("N/A")
                 }
@@ -85,6 +86,27 @@ class ProgressReporter(
     private fun stop() {
         progressScope.cancel()
         progressDispatcher.close()
+    }
+
+    class EtaEstimator(
+        private val total: Int,
+        private val windowMs: Long = 20_000L
+    ) {
+        private val samples = ArrayDeque<Pair<Long, Int>>() // (timestamp, doneCount)
+
+        fun eta(now: Long, done: Int): Duration? {
+            samples += now to done
+            while (samples.first().first < now - windowMs) {
+                samples.removeFirst()
+            }
+            if (samples.size < 2 || done == 0) {
+                return null
+            }
+            val (timestamp, doneCount) = samples.first()
+            val speed = (done - doneCount).toDouble() / (now - timestamp) // games/ms
+            val remainingMs = ((total - done) / speed).toLong()
+            return remainingMs.milliseconds
+        }
     }
 }
 
