@@ -61,7 +61,7 @@ class FringeSearch : Algorithm {
 
     override fun toString(): String = "FringeSearch"
 
-    private data class SearchNode(val node: Node, val g: Int) {
+    private class SearchNode(val node: Node, val g: Int) {
         val f: Int = g + node.heuristicsValue
     }
 }
