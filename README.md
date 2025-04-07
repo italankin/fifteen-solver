@@ -149,10 +149,13 @@ val session = Session(
         * `StaticWeighting`
         * `DynamicWeighting`
 * [`IDA*`][ida-star-impl] - slow, but has low memory usage
+* [`Fringe Search`][fringe-search-impl] - middle ground between A* and IDA*
 
 [a-star-impl]: solver/src/main/java/me/italankin/fifteen/solver/algorithm/astar/AStar.java
 
 [ida-star-impl]: solver/src/main/java/me/italankin/fifteen/solver/algorithm/idastar/IDAStar.java
+
+[fringe-search-impl]: solver/src/main/java/me/italankin/fifteen/solver/algorithm/fringe/FringeSearch.kt
 
 You can implement your own algorithm using [`Algorithm`][algorithm].
 
