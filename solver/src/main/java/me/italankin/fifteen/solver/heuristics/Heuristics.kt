@@ -1,5 +1,6 @@
 package me.italankin.fifteen.solver.heuristics
 
+import me.italankin.fifteen.game.Game
 import me.italankin.fifteen.solver.GameParameters
 
 interface Heuristics {
@@ -86,4 +87,9 @@ operator fun Heuristics.div(divider: Int): Heuristics {
 
         override fun toString(): String = "(${this@div}) / $divider"
     }
+}
+
+fun Heuristics.calc(game: Game): Int {
+    val params = GameParameters(game)
+    return calc(game.state.toIntArray(), params)
 }
