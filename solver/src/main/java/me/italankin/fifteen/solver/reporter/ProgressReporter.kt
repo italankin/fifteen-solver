@@ -55,7 +55,7 @@ class ProgressReporter(
                 sb.append(elapsed.milliseconds.toString(DurationUnit.SECONDS))
                 sb.append(", remaining: ")
                 val eta = etaEstimator.eta(now, queueState.done)
-                if (eta != null) {
+                if (eta != null && !eta.isInfinite()) {
                     sb.append(eta.toString(DurationUnit.SECONDS))
                 } else {
                     sb.append("N/A")
