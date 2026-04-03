@@ -10,6 +10,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.math.max
 
 class Session(
     val generator: BoundedGameGenerator,
@@ -138,7 +139,7 @@ class Session(
         class HalfAvailableProcessors(
             override val threadPriority: Int = Thread.MAX_PRIORITY
         ) : Concurrency() {
-            override val numThreads: Int = Runtime.getRuntime().availableProcessors() / 2
+            override val numThreads: Int = max(Runtime.getRuntime().availableProcessors() / 2, 1)
         }
 
         /**
